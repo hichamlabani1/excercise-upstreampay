@@ -22,13 +22,14 @@ public class Transactions {
     }
 
     @PutMapping("update-transaction/")
-    public ResponseEntity<Transaction> updateTransaction(@RequestBody Transaction transaction){
-        ResponseEntity<Transaction> response;
+    public ResponseEntity<?> updateTransaction(@RequestBody Transaction transaction){
+        ResponseEntity<?> response;
         try {
             response = ResponseEntity.ok(transactionService.updateTransaction(transaction));
         } catch (BusinessException e) {
-       /*     response = ResponseEntity.ok(e)*/
+            response = ResponseEntity.status(403).body(e.getMessage());
         }
+        return response;
     }
 
     @GetMapping("getAll/")

@@ -14,7 +14,7 @@ public class Transaction {
     private int id;
     private BigDecimal amount;
     private String paymentMethode;
-    private String status="new";
+    private String status="NEW";
     @OneToMany(cascade=CascadeType.ALL)
     private List<Command> commands;
 }
