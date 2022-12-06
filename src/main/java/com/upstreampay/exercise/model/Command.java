@@ -5,7 +5,6 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.math.BigDecimal;
 @Getter
-@Setter
 @Entity
 public class Command {
     @Id
@@ -14,5 +13,4 @@ public class Command {
     private String productName;
     private int quantity;
     private BigDecimal price;
-
 }

@@ -18,5 +18,9 @@ public class CommandService {
         return commandRepository.findAll();
     }
 
+    public Command addCommand(Command command){
+        return commandRepository.save(command);
+    }
+
 
 }

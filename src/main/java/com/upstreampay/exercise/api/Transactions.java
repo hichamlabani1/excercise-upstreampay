@@ -1,6 +1,7 @@
 package com.upstreampay.exercise.api;
 
-import com.upstreampay.exercise.exception.BusinessException;
+import com.upstreampay.exercise.exception.NotFoundException;
+import com.upstreampay.exercise.exception.UpdateTransactionException;
 import com.upstreampay.exercise.model.Transaction;
 import com.upstreampay.exercise.service.TransactionService;
 import lombok.RequiredArgsConstructor;
@@ -21,14 +22,19 @@ public class Transactions {
     }
 
     @PutMapping("update-transaction/")
-    public ResponseEntity<Transaction> updateTransaction(@RequestBody Transaction transaction) throws BusinessException {
-        ResponseEntity<Transaction> response;
-        response = ResponseEntity.ok(transactionService.updateTransaction(transaction));
-        return response;
+    public ResponseEntity<Transaction> updateTransaction(@RequestBody Transaction transaction) throws UpdateTransactionException, NotFoundException {
+        return ResponseEntity.ok(transactionService.updateTransaction(transaction));
     }
 
     @GetMapping("getAll/")
     public List<Transaction> getAll() {
         return transactionService.getAllTransactions();
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Transaction> getTransactionById(@PathVariable int id) throws  NotFoundException {
+        return ResponseEntity.ok(transactionService.getTransactionById(id));
+    }
+
+
 }
