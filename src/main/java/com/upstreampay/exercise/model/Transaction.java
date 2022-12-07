@@ -17,8 +17,8 @@ public class Transaction {
     private BigDecimal amount;
     private String paymentMethode;
     private String status="NEW";
-    @OneToMany(cascade=CascadeType.ALL , fetch = FetchType.EAGER)
-    @Setter(AccessLevel.NONE)
+    @OneToMany(cascade=CascadeType.ALL)
+    @JoinColumn(name="transaction_id")
     private List<Command> commands = new ArrayList<>();
 
     public void addCommand(Command command){

@@ -1,6 +1,7 @@
 package com.upstreampay.exercise.service;
 
 import com.upstreampay.exercise.dao.TransactionRepository;
+import com.upstreampay.exercise.dto.TransactionDto;
 import com.upstreampay.exercise.exception.NotFoundException;
 import com.upstreampay.exercise.exception.UpdateTransactionException;
 import com.upstreampay.exercise.model.Transaction;
@@ -30,7 +31,7 @@ public class TransactionService {
 
     }
 
-    public Transaction updateTransaction(Transaction newTransaction) throws UpdateTransactionException, NotFoundException {
+    public Transaction updateTransaction(TransactionDto newTransaction) throws UpdateTransactionException, NotFoundException {
         Optional<Transaction> oldTransaction = transactionRepository.findById(newTransaction.getId());
 
         if (oldTransaction.isEmpty()) {
@@ -45,7 +46,7 @@ public class TransactionService {
         else if (transaction.getStatus().equals(TransactionStatus.NEW.name()) && newTransaction.getStatus().equals(TransactionStatus.CAPTURED.name())) {
             throw new UpdateTransactionException("not authorized to change transaction's status");
         } else {
-            return transactionRepository.save(newTransaction);
+            return transactionRepository.save(toTransactionObj(newTransaction , transaction));
         }
 
 
@@ -53,6 +54,17 @@ public class TransactionService {
 
     public Transaction addTransaction(Transaction transaction) {
         return transactionRepository.save(transaction);
+    }
+
+    //this methode is added to prevent editing commands of a transaction
+    private Transaction toTransactionObj(TransactionDto transactionDto , Transaction oldransaction){
+        Transaction transaction = new Transaction();
+        transaction.setId(transactionDto.getId());
+        transaction.setAmount(transactionDto.getAmount());
+        transaction.setStatus(transactionDto.getStatus());
+        transaction.setPaymentMethode(transactionDto.getPaymentMethode());
+        transaction.setCommands(oldransaction.getCommands());
+        return transaction;
     }
 
 
