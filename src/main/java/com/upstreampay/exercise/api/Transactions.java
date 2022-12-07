@@ -16,17 +16,17 @@ import java.util.List;
 public class Transactions {
     private final TransactionService transactionService;
 
-    @PostMapping("add-transaction/")
+    @PostMapping()
     public ResponseEntity<Transaction> addTransaction(@RequestBody Transaction transaction) {
         return ResponseEntity.status(201).body(transactionService.addTransaction(transaction));
     }
 
-    @PutMapping("update-transaction/")
+    @PutMapping()
     public ResponseEntity<Transaction> updateTransaction(@RequestBody Transaction transaction) throws UpdateTransactionException, NotFoundException {
         return ResponseEntity.ok(transactionService.updateTransaction(transaction));
     }
 
-    @GetMapping("getAll/")
+    @GetMapping()
     public List<Transaction> getAll() {
         return transactionService.getAllTransactions();
     }
