@@ -38,10 +38,10 @@ class ExerciseApplicationTests {
 		System.out.println("---------transaction 2 inserted------------");
 
 
-		System.out.println("---------modification du status de transaction (to authorized)----------");
+		System.out.println("---------changing status of transaction (to authorized)----------");
 		updateStatusTransaction(toTransactionDto(transaction1)  , TransactionStatus.AUTHORIZED.name());
 
-		System.out.println("---------modification du status de transaction (to captured)--------");
+		System.out.println("---------changing status of  transaction (to captured)--------");
 		updateStatusTransaction(toTransactionDto(transaction1)  , TransactionStatus.CAPTURED.name());
 
 		System.out.println("---------all commands--------");
