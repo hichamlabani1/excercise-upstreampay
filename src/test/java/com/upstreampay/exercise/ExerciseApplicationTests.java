@@ -75,9 +75,7 @@ class ExerciseApplicationTests {
 		try {
 
 			transactionService.updateTransaction(transactionDto);
-		} catch (UpdateTransactionException e) {
-			throw new RuntimeException(e);
-		} catch (NotFoundException e) {
+		} catch (UpdateTransactionException | NotFoundException e) {
 			System.out.println(e.getMessage());
 		}
 	}
