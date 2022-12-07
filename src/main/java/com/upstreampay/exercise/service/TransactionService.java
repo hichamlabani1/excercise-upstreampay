@@ -41,7 +41,7 @@ public class TransactionService {
         }
 
         Transaction transaction = oldTransaction.get();
-        if(isValidStatusTransaction(newTransaction.getStatus())){
+        if(!isValidStatusTransaction(newTransaction.getStatus())){
             throw new StatusTransactionException("invalid transaction status !");
         }
 
@@ -76,7 +76,10 @@ public class TransactionService {
     private boolean isValidStatusTransaction(String newStatus) {
         boolean isValidStatus=false;
         for(TransactionStatus transactionStatus : TransactionStatus.values()){
-            isValidStatus = true;
+            if (transactionStatus.name().equals(newStatus)) {
+                isValidStatus = true;
+                break;
+            }
         }
         return isValidStatus;
 
