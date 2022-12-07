@@ -57,7 +57,7 @@ public class TransactionService {
     }
 
     //this methode is added to prevent editing commands of a transaction
-    private Transaction toTransactionObj(TransactionDto transactionDto , Transaction oldransaction){
+    public Transaction toTransactionObj(TransactionDto transactionDto , Transaction oldransaction){
         Transaction transaction = new Transaction();
         transaction.setId(transactionDto.getId());
         transaction.setAmount(transactionDto.getAmount());
@@ -66,6 +66,10 @@ public class TransactionService {
         transaction.setCommands(oldransaction.getCommands());
         return transaction;
     }
+
+
+
+
 
 
 }

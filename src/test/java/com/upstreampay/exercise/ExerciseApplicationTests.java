@@ -1,5 +1,6 @@
 package com.upstreampay.exercise;
 
+import com.upstreampay.exercise.dto.TransactionDto;
 import com.upstreampay.exercise.exception.NotFoundException;
 import com.upstreampay.exercise.exception.UpdateTransactionException;
 import com.upstreampay.exercise.model.Command;
@@ -38,10 +39,10 @@ class ExerciseApplicationTests {
 
 
 		System.out.println("---------modification du status de transaction (to authorized)----------");
-		updateStatusTransaction(transaction1 , TransactionStatus.AUTHORIZED.name());
+		updateStatusTransaction(toTransactionDto(transaction1)  , TransactionStatus.AUTHORIZED.name());
 
 		System.out.println("---------modification du status de transaction (to captured)--------");
-		updateStatusTransaction(transaction1 , TransactionStatus.CAPTURED.name());
+		updateStatusTransaction(toTransactionDto(transaction1)  , TransactionStatus.CAPTURED.name());
 
 		System.out.println("---------all commands--------");
 		List<Command> allCommands = getAllCommands();
@@ -69,10 +70,11 @@ class ExerciseApplicationTests {
 
 	}
 
-	private void updateStatusTransaction(Transaction transaction , String status){
-		transaction.setStatus(status);
+	private void updateStatusTransaction(TransactionDto transactionDto , String status){
+		transactionDto.setStatus(TransactionStatus.valueOf(status));
 		try {
-			transactionService.updateTransaction(transaction);
+
+			transactionService.updateTransaction(transactionDto);
 		} catch (UpdateTransactionException e) {
 			throw new RuntimeException(e);
 		} catch (NotFoundException e) {
@@ -83,5 +85,7 @@ class ExerciseApplicationTests {
 	private List<Command> getAllCommands(){
 		return commandService.getAllcommands();
 	}
-
+	private TransactionDto toTransactionDto(Transaction transaction){
+		return new TransactionDto(transaction.getId() , transaction.getAmount() ,transaction.getPaymentMethode() , transaction.getStatus());
+	}
 }
