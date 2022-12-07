@@ -85,6 +85,6 @@ class ExerciseApplicationTests {
 		return commandService.getAllcommands();
 	}
 	private TransactionDto toTransactionDto(Transaction transaction){
-		return new TransactionDto(transaction.getId() , transaction.getAmount() ,transaction.getPaymentMethode() , transaction.getStatus().name());
+		return new TransactionDto(transaction.getId() , transaction.getAmount() ,transaction.getPaymentMethode() , transaction.getStatus());
 	}
 }
