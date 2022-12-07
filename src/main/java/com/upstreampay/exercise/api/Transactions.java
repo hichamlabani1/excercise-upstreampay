@@ -2,6 +2,7 @@ package com.upstreampay.exercise.api;
 
 import com.upstreampay.exercise.dto.TransactionDto;
 import com.upstreampay.exercise.exception.NotFoundException;
+import com.upstreampay.exercise.exception.StatusTransactionException;
 import com.upstreampay.exercise.exception.UpdateTransactionException;
 import com.upstreampay.exercise.model.Transaction;
 import com.upstreampay.exercise.service.TransactionService;
@@ -23,7 +24,7 @@ public class Transactions {
     }
 
     @PutMapping()
-    public ResponseEntity<Transaction> updateTransaction(@RequestBody TransactionDto transactionDto) throws UpdateTransactionException, NotFoundException {
+    public ResponseEntity<Transaction> updateTransaction(@RequestBody TransactionDto transactionDto) throws UpdateTransactionException, NotFoundException, StatusTransactionException {
         return ResponseEntity.ok(transactionService.updateTransaction(transactionDto));
     }
 

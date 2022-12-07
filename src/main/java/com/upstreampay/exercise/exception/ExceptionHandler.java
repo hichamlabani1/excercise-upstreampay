@@ -17,4 +17,10 @@ public class ExceptionHandler {
         ResponseErrorEntity responseErrorEntity = new ResponseErrorEntity(e.getMessage(), e);
         return new ResponseEntity<>(responseErrorEntity, HttpStatus.FORBIDDEN);
     }
+
+    @org.springframework.web.bind.annotation.ExceptionHandler(value = {StatusTransactionException.class})
+    public ResponseEntity<Object> handleNotFoundException(StatusTransactionException e ){
+        ResponseErrorEntity responseErrorEntity = new ResponseErrorEntity(e.getMessage(), e);
+        return new ResponseEntity<>(responseErrorEntity, HttpStatus.BAD_REQUEST);
+    }
 }

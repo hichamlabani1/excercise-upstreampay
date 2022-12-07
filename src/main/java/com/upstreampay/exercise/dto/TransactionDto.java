@@ -15,5 +15,5 @@ public class TransactionDto {
     private int id;
     private BigDecimal amount;
     private String paymentMethode;
-    private TransactionStatus status;
+    private String status;
 }

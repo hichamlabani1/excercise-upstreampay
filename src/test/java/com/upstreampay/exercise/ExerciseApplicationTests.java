@@ -2,6 +2,7 @@ package com.upstreampay.exercise;
 
 import com.upstreampay.exercise.dto.TransactionDto;
 import com.upstreampay.exercise.exception.NotFoundException;
+import com.upstreampay.exercise.exception.StatusTransactionException;
 import com.upstreampay.exercise.exception.UpdateTransactionException;
 import com.upstreampay.exercise.model.Command;
 import com.upstreampay.exercise.model.PaymentMethodes;
@@ -71,11 +72,11 @@ class ExerciseApplicationTests {
 	}
 
 	private void updateStatusTransaction(TransactionDto transactionDto , String status){
-		transactionDto.setStatus(TransactionStatus.valueOf(status));
+		transactionDto.setStatus(status);
 		try {
 
 			transactionService.updateTransaction(transactionDto);
-		} catch (UpdateTransactionException | NotFoundException e) {
+		} catch (UpdateTransactionException | NotFoundException | StatusTransactionException e) {
 			System.out.println(e.getMessage());
 		}
 	}
@@ -84,6 +85,6 @@ class ExerciseApplicationTests {
 		return commandService.getAllcommands();
 	}
 	private TransactionDto toTransactionDto(Transaction transaction){
-		return new TransactionDto(transaction.getId() , transaction.getAmount() ,transaction.getPaymentMethode() , transaction.getStatus());
+		return new TransactionDto(transaction.getId() , transaction.getAmount() ,transaction.getPaymentMethode() , transaction.getStatus().name());
 	}
 }
