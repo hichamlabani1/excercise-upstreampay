@@ -27,9 +27,9 @@ class ExerciseApplicationTests {
 
 	static Transaction transaction1;
 	static Transaction transaction2;
-	@Test
-	void contextLoads() throws InterruptedException {
 
+	@Test
+	void launchTest() {
 
 		transactionService.addTransaction(transaction1);
 		System.out.println("---------transaction 1 inserted------------");
