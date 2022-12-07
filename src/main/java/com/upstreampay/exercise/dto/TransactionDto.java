@@ -1,5 +1,6 @@
 package com.upstreampay.exercise.dto;
 
+import com.upstreampay.exercise.model.TransactionStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,5 +15,5 @@ public class TransactionDto {
     private int id;
     private BigDecimal amount;
     private String paymentMethode;
-    private String status;
+    private TransactionStatus status;
 }

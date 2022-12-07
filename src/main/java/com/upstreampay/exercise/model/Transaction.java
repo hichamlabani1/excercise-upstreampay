@@ -16,7 +16,7 @@ public class Transaction {
     private int id;
     private BigDecimal amount;
     private String paymentMethode;
-    private String status="NEW";
+    private TransactionStatus status = TransactionStatus.NEW;
     @OneToMany(cascade=CascadeType.ALL)
     @JoinColumn(name="transaction_id")
     private List<Command> commands = new ArrayList<>();

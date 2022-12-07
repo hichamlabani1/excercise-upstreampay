@@ -39,11 +39,11 @@ public class TransactionService {
         }
 
         Transaction transaction = oldTransaction.get();
-        if (transaction.getStatus().equals(TransactionStatus.CAPTURED.name()) && !transaction.getStatus().equals(newTransaction.getStatus())) {
+        if (transaction.getStatus().name().equals(TransactionStatus.CAPTURED.name()) && !transaction.getStatus().equals(newTransaction.getStatus())) {
             throw new UpdateTransactionException("transaction's status cannot be changed !");
         }
         //check if the transaction status was changed from 'new' to 'captured'
-        else if (transaction.getStatus().equals(TransactionStatus.NEW.name()) && newTransaction.getStatus().equals(TransactionStatus.CAPTURED.name())) {
+        else if (transaction.getStatus().name().equals(TransactionStatus.NEW.name()) && newTransaction.getStatus().name().equals(TransactionStatus.CAPTURED.name())) {
             throw new UpdateTransactionException("not authorized to change transaction's status");
         } else {
             return transactionRepository.save(toTransactionObj(newTransaction , transaction));
@@ -61,7 +61,7 @@ public class TransactionService {
         Transaction transaction = new Transaction();
         transaction.setId(transactionDto.getId());
         transaction.setAmount(transactionDto.getAmount());
-        transaction.setStatus(transactionDto.getStatus());
+        transaction.setStatus( transactionDto.getStatus());
         transaction.setPaymentMethode(transactionDto.getPaymentMethode());
         transaction.setCommands(oldransaction.getCommands());
         return transaction;
