@@ -13,13 +13,8 @@ public class CommandService {
 
     private final CommandRepository commandRepository;
 
-
     public List<Command> getAllcommands(){
         return commandRepository.findAll();
-    }
-
-    public Command addCommand(Command command){
-        return commandRepository.save(command);
     }
 
 
